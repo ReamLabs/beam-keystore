@@ -77,7 +77,7 @@ mod tests {
         assert!(result.is_ok());
         
         let keystore = result.unwrap();
-        assert_eq!(keystore.version, 3);
+        assert_eq!(keystore.version, 5);
         assert_eq!(keystore.crypto.cipher, "aes-256-gcm");
         assert_eq!(keystore.crypto.kdf, "argon2id");
     }

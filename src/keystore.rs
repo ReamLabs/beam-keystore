@@ -135,7 +135,7 @@ impl KeystoreGenerator {
         Ok(keystore)
     }
 
-    fn process_private_key(&self, private_key: &str) -> Result<Vec<u8>, Box<dyn Error>> {
+    pub fn process_private_key(&self, private_key: &str) -> Result<Vec<u8>, Box<dyn Error>> {
         let key = if private_key.starts_with("0x") {
             &private_key[2..]
         } else {
@@ -149,7 +149,7 @@ impl KeystoreGenerator {
         Ok(hex::decode(key)?)
     }
 
-    fn validate_address(&self, address: String) -> Result<String, Box<dyn Error>> {
+    pub fn validate_address(&self, address: String) -> Result<String, Box<dyn Error>> {
         let addr = if address.starts_with("0x") {
             &address[2..]
         } else {
@@ -164,7 +164,7 @@ impl KeystoreGenerator {
         Ok(address)
     }
 
-    fn derive_address_from_private_key(&self, private_key: &[u8]) -> Result<String, Box<dyn Error>> {
+    pub fn derive_address_from_private_key(&self, private_key: &[u8]) -> Result<String, Box<dyn Error>> {
         // This is a simplified version - in production, you'd use proper secp256k1
         // to derive the public key and then the address
         use sha3::{Digest, Keccak256};
@@ -177,7 +177,7 @@ impl KeystoreGenerator {
         Ok(format!("0x{}", hex::encode(address)))
     }
 
-    fn encrypt_private_key(&self, private_key: &[u8], key: &[u8], nonce: &[u8]) -> Result<Vec<u8>, Box<dyn Error>> {
+    pub fn encrypt_private_key(&self, private_key: &[u8], key: &[u8], nonce: &[u8]) -> Result<Vec<u8>, Box<dyn Error>> {
         // AES-256-GCM encryption
         let cipher_key = Key::<Aes256Gcm>::from_slice(key);
         let cipher = Aes256Gcm::new(cipher_key);
