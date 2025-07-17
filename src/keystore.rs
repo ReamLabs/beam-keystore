@@ -17,6 +17,7 @@ pub struct Keystore {
     pub address: String,
     pub crypto: CryptoParams,
     pub quantum_secure: bool,
+    pub keytype: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -129,7 +130,8 @@ impl KeystoreGenerator {
                 kdf: "argon2id".to_string(),
                 kdfparams: kdf_params,
                 mac: "".to_string(), // Not needed with GCM as it provides authentication
-            },
+            }, 
+            keytype: "xmss-poisedon2-ots".to_string(),
         };
 
         Ok(keystore)

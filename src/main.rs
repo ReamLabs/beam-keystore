@@ -80,6 +80,7 @@ mod tests {
         assert_eq!(keystore.version, 5);
         assert_eq!(keystore.crypto.cipher, "aes-256-gcm");
         assert_eq!(keystore.crypto.kdf, "argon2id");
+        assert_eq!(keystore.keytype, "xmss-poisedon2-ots");
     }
 
     #[test]
